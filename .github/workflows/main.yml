@@ -56,7 +56,7 @@ jobs:
       - name: Docker login (Azure)
         uses: docker/login-action@v3
         with:
-          registry: hemanthreddy739.azurecr.io
+          registry: ccrazurebhuvana.azurecr.io
           username: ${{ vars.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}    
   
