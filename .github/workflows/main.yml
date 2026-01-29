@@ -52,4 +52,4 @@ jobs:
           file: ./Dockerfile
           tags: |
             ${{ vars.DOCKER_USERNAME }}/python-project:latest
-            ghcr.io/${{ github.repository }}:latest
+           
