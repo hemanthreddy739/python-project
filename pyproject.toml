@@ -116,7 +116,7 @@ classifiers = [
 #
 # For an analysis of this field vs pip's requirements files see:
 # https://packaging.python.org/discussions/install-requires-vs-requirements/
-dependencies = ["peppercorn"]
+dependencies = ["flask"]
 
 # List additional groups of dependencies here (e.g. development
 # dependencies). Users will be able to install these using the "extras"
@@ -151,7 +151,7 @@ test = ["coverage"]
 # The following would provide a command line executable called `sample`
 # which executes the function `main` from this package when invoked.
 [project.scripts]
-sample = "sample:main"
+sample = "sample.app:run_app"
 
 
 # This is configuration specific to the `setuptools` build backend.

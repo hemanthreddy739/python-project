@@ -1,39 +1,115 @@
-# A sample Python project
+# Sample Flask Application
 
-![Python Logo](https://www.python.org/static/community_logos/python-logo.png "Sample inline image")
+A simple Flask web application with health check API endpoints.
 
-A sample project that exists as an aid to the [Python Packaging User
-Guide][packaging guide]'s [Tutorial on Packaging and Distributing
-Projects][distribution tutorial].
+## Features
 
-This project does not aim to cover best practices for Python project
-development as a whole. For example, it does not provide guidance or tool
-recommendations for version control, documentation, or testing.
+- Flask web server running on port 5000
+- Health check endpoint at `/health`
+- API version endpoint at `/api/version`
+- Root welcome endpoint at `/`
 
-[The source for this project is available here][src].
+## Installation
 
-The metadata for a Python project is defined in the `pyproject.toml` file,
-an example of which is included in this project. You should edit this file
-accordingly to adapt this sample project to your needs.
+```bash
+pip install -e .
+```
 
-----
+## Running the Application
 
-This is the README file for the project.
+### Local Development
 
-The file should use UTF-8 encoding and can be written using
-[reStructuredText][rst] or [markdown][md use] with the appropriate [key set][md
-use]. It will be used to generate the project webpage on PyPI and will be
-displayed as the project homepage on common code-hosting services, and should be
-written for that purpose.
+```bash
+sample
+```
 
-Typical contents for this file would include an overview of the project, basic
-usage examples, etc. Generally, including the project changelog in here is not a
-good idea, although a simple “What's New” section for the most recent version
-may be appropriate.
+The application will start on `http://localhost:5000`
 
-[packaging guide]: https://packaging.python.org
-[distribution tutorial]: https://packaging.python.org/tutorials/packaging-projects/
-[src]: https://github.com/pypa/sampleproject
-[rst]: http://docutils.sourceforge.net/rst.html
-[md]: https://tools.ietf.org/html/rfc7764#section-3.5 "CommonMark variant"
-[md use]: https://packaging.python.org/specifications/core-metadata/#description-content-type-optional
+### Using Docker
+
+Build the Docker image:
+```bash
+docker build -t sample-flask-app:latest .
+```
+
+Run the container:
+```bash
+docker run -p 5000:5000 sample-flask-app:latest
+```
+
+## API Endpoints
+
+### 1. Root Endpoint
+- **URL**: `/`
+- **Method**: `GET`
+- **Response**:
+```json
+{
+  "message": "Welcome to Sample Flask App",
+  "endpoints": {
+    "health": "/health",
+    "version": "/api/version"
+  }
+}
+```
+
+### 2. Health Check
+- **URL**: `/health`
+- **Method**: `GET`
+- **Response**:
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-02-05T09:55:39.508083",
+  "service": "sample-app"
+}
+```
+
+### 3. API Version
+- **URL**: `/api/version`
+- **Method**: `GET`
+- **Response**:
+```json
+{
+  "version": "1.0.0",
+  "api_version": "v1"
+}
+```
+
+## Testing the Application
+
+Using curl:
+```bash
+# Test health endpoint
+curl http://localhost:5000/health
+
+# Test version endpoint
+curl http://localhost:5000/api/version
+
+# Test root endpoint
+curl http://localhost:5000/
+```
+
+## Project Structure
+
+```
+.
+├── Dockerfile           # Docker configuration
+├── pyproject.toml       # Project configuration with Flask dependency
+├── src/
+│   └── sample/
+│       ├── __init__.py  # Package initialization
+│       ├── app.py       # Flask application code
+│       └── simple.py    # Simple utility functions
+└── tests/
+    └── test_simple.py   # Tests
+```
+
+## Requirements
+
+- Python 3.9+
+- Flask 3.1+
+
+## License
+
+MIT License - See LICENSE.txt for details
